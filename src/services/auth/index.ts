@@ -15,6 +15,8 @@ export const { auth, handlers, } = NextAuth({
     },
     adapter: PrismaAdapter(prisma),
     providers: [
+        Google,
+        GitHub,
         Nodemailer({
         server: process.env.EMAIL_SERVER,
         from: process.env.EMAIL_FROM,
