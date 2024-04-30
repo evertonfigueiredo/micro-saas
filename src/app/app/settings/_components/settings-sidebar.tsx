@@ -27,13 +27,13 @@ export function SettingsSidebar() {
             href="/app/settings/theme"
             active={isActive('/app/settings/theme')}
           >
-            Tema
+            Aparência
           </DashboardSidebarNavLink>
           <DashboardSidebarNavLink
             href="/app/settings/billing"
             active={isActive('/app/settings/billing')}
           >
-            Pagamentos
+            Assinatura
           </DashboardSidebarNavLink>
         </DashboardSidebarNavMain>
       </DashboardSidebarNav>
