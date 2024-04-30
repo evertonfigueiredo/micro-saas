@@ -23,6 +23,11 @@ import {
 } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { Todo } from '../type'
+import { upsertTodo } from '../actions'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { upsertTodoSchema } from '../schema'
+import { useRouter } from 'next/navigation'
+import { toast } from '@/components/ui/use-toast'
 
 type TodoUpsertSheetsProps = {
   children?: React.ReactNode
@@ -31,9 +36,22 @@ type TodoUpsertSheetsProps = {
 
 export function TodoUpsertSheet({ children }: TodoUpsertSheetsProps) {
   const ref = useRef<HTMLDivElement>(null)
-  const form = useForm()
+  const router = useRouter()
 
-  const onSubmit = form.handleSubmit((data) => {
+  const form = useForm({
+    resolver: zodResolver(upsertTodoSchema),
+  })
+
+  const onSubmit = form.handleSubmit(async (data) => {
+    await upsertTodo(data)
+    router.refresh()
+
+    ref.current?.click()
+
+    toast({
+      title: 'Sucesso',
+      description: 'Sua tarefa foi criado com sucesso.',
+    })
     console.log(data)
   })
 
