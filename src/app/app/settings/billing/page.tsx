@@ -23,8 +23,7 @@ export default async function Page() {
           <CardTitle>Planos e Uso</CardTitle>
           <CardDescription>
             O seu plano atual é o
-            <span className="font-bold uppercase"> {plan.name}</span>. O
-            validade do seu plano é: [next_due_date]
+            <span className="font-bold uppercase"> {plan.name}</span>
           </CardDescription>
         </CardHeader>
         <CardContent className="p-6">
@@ -43,8 +42,14 @@ export default async function Page() {
           </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between border-t pt-6">
-          <span>Para um maior limite assine o nosso plano PRO.</span>
-          <Button type="submit">Assine por R$9/mês</Button>
+          {plan.name === 'pro' ? (
+            <span>Você já esta no nosso melhor plano.</span>
+          ) : (
+            <div>
+              <span>Para um maior limite, assine o nosso plano PRO.</span>
+              <Button type="submit">Assine por R$9/mês</Button>
+            </div>
+          )}
         </CardFooter>
       </Card>
     </form>
