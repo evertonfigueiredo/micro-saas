@@ -3,6 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 import Nodemailer from 'next-auth/providers/nodemailer'
+// import EmailProvider from 'next-auth/providers/email'
 import { prisma } from '../database'
 import { createStripeCustomer } from '../stripe'
 
@@ -19,7 +20,14 @@ export const { auth, handlers } = NextAuth({
     Google,
     GitHub,
     Nodemailer({
-      server: process.env.EMAIL_SERVER,
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
       from: process.env.EMAIL_FROM,
     }),
   ],
