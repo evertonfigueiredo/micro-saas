@@ -18,20 +18,20 @@ export function SettingsSidebar() {
       <DashboardSidebarNav>
         <DashboardSidebarNavMain>
           <DashboardSidebarNavLink
-            href="/app/settings"
-            active={isActive('/app/settings')}
+            href="/sistem/settings"
+            active={isActive('/sistem/settings')}
           >
             Meu Perfil
           </DashboardSidebarNavLink>
           <DashboardSidebarNavLink
-            href="/app/settings/theme"
-            active={isActive('/app/settings/theme')}
+            href="/sistem/settings/theme"
+            active={isActive('/sistem/settings/theme')}
           >
             Aparência
           </DashboardSidebarNavLink>
           <DashboardSidebarNavLink
-            href="/app/settings/billing"
-            active={isActive('/app/settings/billing')}
+            href="/sistem/settings/billing"
+            active={isActive('/sistem/settings/billing')}
           >
             Assinatura
           </DashboardSidebarNavLink>
