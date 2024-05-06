@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE "Todo" ADD COLUMN "doneAt" DATETIME;
+ALTER TABLE "Todo" ADD COLUMN "doneAt" TIMESTAMP;
