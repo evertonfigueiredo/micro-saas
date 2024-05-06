@@ -62,14 +62,14 @@ export const createCheckoutSession = async (
 
     const session = await stripe.billingPortal.sessions.create({
       customer: customer.id,
-      return_url: 'http://localhost:3000/sistem/settings/billing',
+      return_url: 'http://localhost:3000/app/settings/billing',
       flow_data: {
         type: 'subscription_update_confirm',
         after_completion: {
           type: 'redirect',
           redirect: {
             return_url:
-              'http://localhost:3000/sistem/settings/billing?success=true',
+              'http://localhost:3000/app/settings/billing?success=true',
           },
         },
         subscription_update_confirm: {

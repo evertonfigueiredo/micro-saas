@@ -36,16 +36,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
       <DashboardSidebarMain className="flex flex-col flex-grow">
         <DashboardSidebarNav>
           <DashboardSidebarNavMain>
-            <DashboardSidebarNavLink
-              href="/sistem"
-              active={isActive('/sistem')}
-            >
+            <DashboardSidebarNavLink href="/app" active={isActive('/app')}>
               <HomeIcon className="w-3 h-3 mr-3" />
               Tarefas
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink
-              href="/sistem/settings"
-              active={isActive('/sistem/settings')}
+              href="/app/settings"
+              active={isActive('/app/settings')}
             >
               <MixerHorizontalIcon className="w-3 h-3 mr-3" />
               Configurações
