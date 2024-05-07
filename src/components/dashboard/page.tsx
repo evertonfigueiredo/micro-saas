@@ -19,7 +19,7 @@ export function DashboardPageHeader({
   return (
     <header
       className={cn([
-        'py-3 px-6 border-b border-border flex items-center justify-between',
+        'px-6 h-13 border-b border-border flex items-center justify-between',
         className,
       ])}
     >

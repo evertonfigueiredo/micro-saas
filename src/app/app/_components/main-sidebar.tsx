@@ -11,7 +11,11 @@ import {
   DashboardSidebarNavHeaderTitle,
   DashboardSidebarFooter,
 } from '@/components/dashboard/siderbar'
-import { HomeIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
+import {
+  HomeIcon,
+  MixerHorizontalIcon,
+  PaperPlaneIcon,
+} from '@radix-ui/react-icons'
 import { usePathname } from 'next/navigation'
 import { UserDropdown } from './user-dropdown'
 import { Logo } from '@/components/logo'
@@ -46,6 +50,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
             >
               <MixerHorizontalIcon className="w-3 h-3 mr-3" />
               Configurações
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
+              href="/app/send_book"
+              active={isActive('/app/send_book')}
+            >
+              <PaperPlaneIcon className="w-3 h-3 mr-3" />
+              Enviar Ebook
             </DashboardSidebarNavLink>
           </DashboardSidebarNavMain>
         </DashboardSidebarNav>

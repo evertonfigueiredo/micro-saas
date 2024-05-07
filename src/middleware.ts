@@ -4,7 +4,6 @@ import { getUrl } from './lib/get-url'
 export function middleware(request: NextRequest) {
   // Determinar o prefixo do cookie com base no ambiente
   const cookiePrefix = process.env.NODE_ENV === 'production' ? '__Secure-' : ''
-  console.log(process.env.NODE_ENV)
 
   // Construir o nome do cookie usando o prefixo determinado
   const cookieName = `${cookiePrefix}authjs.session-token`

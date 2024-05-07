@@ -11,7 +11,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <DashboardPage>
       <DashboardPageHeader className="p-3">
-        <DashboardPageHeaderTitle>Configurações</DashboardPageHeaderTitle>
+        <DashboardPageHeaderTitle>Envio de Ebook's</DashboardPageHeaderTitle>
       </DashboardPageHeader>
       <DashboardPageMain>
         <div className="container max-w-screen lg">

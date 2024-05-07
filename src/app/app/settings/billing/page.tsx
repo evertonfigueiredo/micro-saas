@@ -45,10 +45,10 @@ export default async function Page() {
           {plan.name === 'pro' ? (
             <span>Você já esta no nosso melhor plano.</span>
           ) : (
-            <div>
+            <>
               <span>Para um maior limite, assine o nosso plano PRO.</span>
               <Button type="submit">Assine por R$9/mês</Button>
-            </div>
+            </>
           )}
         </CardFooter>
       </Card>
