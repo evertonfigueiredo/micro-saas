@@ -5,11 +5,10 @@ import Redis from 'ioredis'
 import 'dotenv/config'
 import Mail from '../services/mail'
 
-const connection = new Redis({
-  host: process.env.REDIS_HOST as string,
-  port: parseInt(process.env.REDIS_PORT as string),
-  maxRetriesPerRequest: null,
-})
+const connection = new Redis(
+  `${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+  { maxRetriesPerRequest: null },
+)
 
 export const sampleQueue = new Queue('sendBookMail', {
   connection,

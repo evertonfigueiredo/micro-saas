@@ -24,22 +24,6 @@ export async function sendBook(data: any) {
       attempts: 3,
     })
 
-    await sampleQueue.add('sendBookMail', data, {
-      attempts: 3,
-    })
-
-    await sampleQueue.add('sendBookMail', data, {
-      attempts: 3,
-    })
-
-    await sampleQueue.add('sendBookMail', data, {
-      attempts: 3,
-    })
-
-    await sampleQueue.add('sendBookMail', data, {
-      attempts: 3,
-    })
-
     return {
       success: true,
       message: 'Job enviado para a fila com sucesso',
