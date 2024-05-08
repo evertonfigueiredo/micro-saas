@@ -18,20 +18,20 @@ export function SettingsSidebar() {
       <DashboardSidebarNav>
         <DashboardSidebarNavMain>
           <DashboardSidebarNavLink
-            href="/app/send_book"
-            active={isActive('/app/send_book')}
+            href="/app/up_book"
+            active={isActive('/app/up_book')}
           >
             Upload de Ebook
           </DashboardSidebarNavLink>
           <DashboardSidebarNavLink
-            href="/app/settings/theme"
-            active={isActive('/app/settings/theme')}
+            href="/app/up_book/my_books"
+            active={isActive('/app/up_book/my_books')}
           >
             Meus Ebooks
           </DashboardSidebarNavLink>
           <DashboardSidebarNavLink
-            href="/app/settings/billing"
-            active={isActive('/app/settings/billing')}
+            href="/app/up_book/send_book"
+            active={isActive('/app/up_book/send_book')}
           >
             Enviar Ebook
           </DashboardSidebarNavLink>

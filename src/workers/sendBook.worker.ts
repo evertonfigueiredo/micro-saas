@@ -1,8 +1,9 @@
+// No arquivo sendBook.worker.ts
+
 import { Worker, Queue } from 'bullmq'
 import Redis from 'ioredis'
 import 'dotenv/config'
-
-console.log(process.env.REDIS_PORT)
+import Mail from '../services/mail'
 
 const connection = new Redis({
   host: process.env.REDIS_HOST as string,
@@ -10,7 +11,7 @@ const connection = new Redis({
   maxRetriesPerRequest: null,
 })
 
-export const sampleQueue = new Queue('sendBook', {
+export const sampleQueue = new Queue('sendBookMail', {
   connection,
   defaultJobOptions: {
     attempts: 2,
@@ -18,14 +19,29 @@ export const sampleQueue = new Queue('sendBook', {
 })
 
 const worker = new Worker(
-  'sendBook', // this is the queue name, the first string parameter we provided for Queue()
+  'sendBookMail',
   async (job) => {
     const data = job?.data
+    try {
+      // Envie o e-mail aqui
+      Mail.from = data.from
+      Mail.to = data.email
+      Mail.subject = 'Seu E-book chegou'
+      Mail.message = data.name
 
-    console.log(data.message)
+      await Mail.sendMail()
+    } catch (error) {
+      console.error('Erro ao enviar e-mail:', error)
+      throw error
+    }
   },
   {
     connection,
+    concurrency: 1,
+    limiter: {
+      max: 1,
+      duration: 1000,
+    },
   },
 )
 

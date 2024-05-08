@@ -46,6 +46,7 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-table": "^8.16.0",
+    "@types/nodemailer": "^6.4.15",
     "bull": "^4.12.2",
     "bullmq": "^5.7.8",
     "class-variance-authority": "^0.7.0",

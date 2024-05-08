@@ -52,8 +52,8 @@ export function MainSidebar({ user }: MainSidebarProps) {
               Configurações
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink
-              href="/app/send_book"
-              active={isActive('/app/send_book')}
+              href="/app/up_book"
+              active={isActive('/app/up_book')}
             >
               <PaperPlaneIcon className="w-3 h-3 mr-3" />
               Enviar Ebook
