@@ -1,11 +1,7 @@
-import Redis from 'ioredis'
+const bucketName = 'saas'
+const objetoChave = 'clvxsqq7w0000usptuy235r9i/1715284952048-Teste'
+const regiaoBucket = 'auto'
 
-const redis = new Redis({
-  url: 'https://us1-super-eft-42993.upstash.io',
-  token:
-    'AafxASQgYTdlOGUwNGItYjIxMS00MDQ4LTkxYjgtNWU3MjhlZmY0YTMzMWE4OTg4YTM3OTBkNGEwNDk0MmQ3NDJlZTc0ZTY1MjI=',
-})
+const linkDoArquivo = `https://b1dc0ca73257aab25289d3639f9117c9.r2.cloudflarestorage.com/saas/${objetoChave}`
 
-const data = await redis.set('foo', 'bar')
-
-console.log(data)
+console.log('Link do arquivo:', linkDoArquivo)

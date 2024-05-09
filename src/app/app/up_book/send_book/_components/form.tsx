@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { sendBook } from '../actions'
-import { updateProfileSchema } from '../schema'
+import { sendBookSchema } from '../schema'
 import { toast } from '@/components/ui/use-toast'
 import { z } from 'zod'
 import {
@@ -26,21 +26,28 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-export function ProfileForm() {
+export function SendForm() {
   const router = useRouter()
 
-  const form = useForm<z.infer<typeof updateProfileSchema>>({
-    resolver: zodResolver(updateProfileSchema),
+  const form = useForm<z.infer<typeof sendBookSchema>>({
+    resolver: zodResolver(sendBookSchema),
   })
 
   const onSubmit = form.handleSubmit(async (data) => {
-    await sendBook(data)
+    const result = await sendBook(data)
     router.refresh()
 
-    toast({
-      title: 'Sucesso',
-      description: 'Seu perfil foi atualizado com sucesso.',
-    })
+    if (result.success) {
+      toast({
+        title: 'Sucesso',
+        description: 'Seu e-book foi enviado com sucesso.',
+      })
+    } else {
+      toast({
+        title: 'Error',
+        description: 'Algo de errado aconteceu, tente novamente mais tarde.',
+      })
+    }
   })
 
   return (
@@ -95,7 +102,7 @@ export function ProfileForm() {
         </Card>
 
         <SheetFooter className="mt-auto">
-          <Button disabled={form.formState.isLoading} type="submit">
+          <Button disabled={form.formState.isSubmitting} type="submit">
             {form.formState.isSubmitting && 'Enviando...'}
             {!form.formState.isSubmitting && 'Enviar E-book'}
           </Button>
