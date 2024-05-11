@@ -82,7 +82,16 @@ export function EbookDataTable({ data }: EbookDataTable) {
           </Button>
         )
       },
-      cell: ({ row }) => <div>{row.getValue('formattedTitle')}</div>,
+      cell: ({ row }) => (
+        <div>
+          <a
+            href="https://pub-2e40531df26b477eafc833eaee23309b.r2.dev/clw2am6vo0002zudi8t3ebe3v/1715448026858-José%20Everton%20Figueiredo%20Gomes.pdf"
+            download
+          >
+            {row.getValue('formattedTitle')}
+          </a>
+        </div>
+      ),
     },
     {
       accessorKey: 'createdAt',
