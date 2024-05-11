@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const sendBookSchema = z.object({
-  email: z.string(),
-  name: z.string(),
+export const deleteEbookSchema = z.object({
+  ebookId: z.string(),
+  ebookName: z.string(),
 })

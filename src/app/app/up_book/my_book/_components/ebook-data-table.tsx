@@ -38,14 +38,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Todo } from '../type'
+import { Ebook } from '../type'
 import { useRouter } from 'next/navigation'
-import { deleteTodo } from '../actions'
+import { deleteEbook } from '../actions'
 import { toast } from '@/components/ui/use-toast'
 import { Input } from '@/components/ui/input'
 
 type EbookDataTable = {
-  data: Todo[]
+  data: Ebook[]
 }
 
 export function EbookDataTable({ data }: EbookDataTable) {
@@ -59,16 +59,16 @@ export function EbookDataTable({ data }: EbookDataTable) {
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const handleDeleteEbook = async (todo: Todo) => {
-    await deleteTodo({ id: todo.id })
+  const handleDeleteEbook = async (ebook: Ebook) => {
+    await deleteEbook({ ebookId: ebook.id, ebookName: ebook.title })
     router.refresh()
     toast({
       title: 'Sucesso ao deletar',
-      description: 'Sua tarefa foi deletada com sucesso!',
+      description: 'Seu E-book foi deletado com sucesso!',
     })
   }
 
-  const columns: ColumnDef<Todo>[] = [
+  const columns: ColumnDef<Ebook>[] = [
     {
       accessorKey: 'formattedTitle',
       header: ({ column }) => {
