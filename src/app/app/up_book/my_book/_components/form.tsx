@@ -6,16 +6,27 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { getUrlBooks } from '../actions'
+import { EbookDataTable } from './ebook-data-table'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export async function MyBook() {
-  const url = await getUrlBooks()
+  const ebooks = await getUrlBooks()
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Nome</CardTitle>
-        <CardDescription>{url}</CardDescription>
-      </CardHeader>
-      <CardContent></CardContent>
-    </Card>
+    <ScrollArea>
+      <div className="h-[80vh]">
+        <Card>
+          <CardHeader>
+            <CardTitle>Meus E-books</CardTitle>
+            <CardDescription>
+              Aqui estão todos os seus E-books dentro da plataforma.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <EbookDataTable data={ebooks} />
+          </CardContent>
+        </Card>
+      </div>
+    </ScrollArea>
   )
 }

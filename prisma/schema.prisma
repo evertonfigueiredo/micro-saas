@@ -55,6 +55,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   todos         Todo[]
+  ebooks        Ebook[]
 }
  
 model VerificationToken {
@@ -76,4 +77,16 @@ model Todo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   doneAt DateTime?
+}
+
+model Ebook {
+  id String @id @default(cuid())
+  title String
+  
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

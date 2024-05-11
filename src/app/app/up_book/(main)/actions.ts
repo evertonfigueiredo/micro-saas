@@ -3,11 +3,20 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3'
 import { r2 } from '@/services/cloudflare'
 import { auth } from '@/services/auth'
+import { prisma } from '@/services/database'
 
 async function uploadFileToS3(file: any, fileName: string) {
   const session = await auth()
+
+  if (!session?.user?.id) {
+    return {
+      error: 'Não autorizado',
+      data: null,
+    }
+  }
+
   const timestamp = new Date().getTime()
-  const nameFile = `${timestamp}-${fileName}`
+  const nameFile = `${timestamp}-${fileName}.pdf`
 
   const params = {
     Bucket: 'saas',
@@ -20,9 +29,17 @@ async function uploadFileToS3(file: any, fileName: string) {
   try {
     const response = await r2.send(command)
 
+    await prisma.ebook.create({
+      data: {
+        title: `${nameFile}`,
+        userId: session?.user?.id,
+      },
+    })
+
+    await prisma.$disconnect()
+
     return {
       status: true,
-      nameFile,
       response,
     }
   } catch (error) {
@@ -46,8 +63,6 @@ export async function uploadFile(formData: any) {
     const result = await uploadFileToS3(buffer, name)
 
     if (result.status) {
-      console.log(result)
-
       const data = {
         status: 'Upload Realizado',
         message: 'Seu E-book foi carregado com sucesso!',

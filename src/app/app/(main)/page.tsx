@@ -10,6 +10,7 @@ import { TodoUpsertSheet } from './_components/todo-upsert-sheet'
 import { Button } from '@/components/ui/button'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { getUserTodos } from './actions'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export default async function Page() {
   const todos = await getUserTodos()
@@ -30,7 +31,11 @@ export default async function Page() {
         </DashboardPageHeaderNav>
       </DashboardPageHeader>
       <DashboardPageMain>
-        <TodoDataTable data={todos} />
+        <ScrollArea>
+          <div className="h-[80vh]">
+            <TodoDataTable data={todos} />
+          </div>
+        </ScrollArea>
       </DashboardPageMain>
     </DashboardPage>
   )

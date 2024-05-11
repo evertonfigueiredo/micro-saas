@@ -16,6 +16,8 @@ export async function getUserTodos() {
       createdAt: 'asc',
     },
   })
+
+  await prisma.$disconnect()
   return todos
 }
 
@@ -24,7 +26,7 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
 
   if (!session?.user?.id) {
     return {
-      error: 'Não autoriazado',
+      error: 'Não autorizado',
       data: null,
     }
   }
@@ -58,6 +60,8 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
       },
     })
 
+    await prisma.$disconnect()
+
     return {
       error: null,
       data: updatedTodo,
@@ -77,6 +81,8 @@ export async function upsertTodo(input: z.infer<typeof upsertTodoSchema>) {
       userId: session?.user?.id,
     },
   })
+
+  await prisma.$disconnect()
   return todo
 }
 
@@ -101,6 +107,7 @@ export async function deleteTodo(input: z.infer<typeof deleteTodoSchema>) {
   })
 
   if (!todo) {
+    await prisma.$disconnect()
     return {
       error: 'Não encontrado.',
       data: null,
@@ -113,7 +120,7 @@ export async function deleteTodo(input: z.infer<typeof deleteTodoSchema>) {
       userId: session?.user?.id,
     },
   })
-
+  await prisma.$disconnect()
   return {
     error: null,
     data: 'Tarefa deletada com sucesso.',

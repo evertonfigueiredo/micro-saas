@@ -1,12 +1,35 @@
 'use server'
 
 import { auth } from '@/services/auth'
+import { prisma } from '@/services/database'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getUrlBooks() {
   const session = await auth()
 
-  const url = `${process.env.CLOUDFLARE_URL_PUBLIC}/${session?.user.id}/1715286943219-Teste.pdf`
+  const ebooks = await prisma.ebook.findMany({
+    where: {
+      userId: session?.user?.id,
+    },
+    orderBy: {
+      createdAt: 'asc',
+    },
+  })
 
-  return url
+  const ebooksWithLinks = ebooks.map((ebook) => {
+    const match = ebook.title.match(/\d+-(.+)/)
+    let formattedTitle = match ? match[1] : ebook.title
+
+    // DecodeURIComponent para corrigir caracteres acentuados na URL
+    formattedTitle = decodeURIComponent(formattedTitle)
+
+    return {
+      ...ebook,
+      link: `${process.env.CLOUDFLARE_URL_PUBLIC}/${ebook.userId}/${ebook.title}`,
+      formattedTitle,
+    }
+  })
+
+  await prisma.$disconnect()
+
+  return ebooksWithLinks
 }

@@ -25,4 +25,6 @@ export async function updateProfile(
       name: input.name,
     },
   })
+
+  await prisma.$disconnect()
 }
