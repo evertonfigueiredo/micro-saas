@@ -42,6 +42,8 @@ export const createStripeCustomer = async (input: {
     },
   })
 
+  await prisma.$disconnect()
+
   return createdCustomer
 }
 
@@ -134,6 +136,7 @@ export const handleProcessWebhookUpdatedSubscription = async (event: {
   })
 
   if (!userExists) {
+    await prisma.$disconnect()
     throw new Error('user of stripeCustomerId not found')
   }
 
@@ -148,6 +151,8 @@ export const handleProcessWebhookUpdatedSubscription = async (event: {
       stripePriceId,
     },
   })
+
+  await prisma.$disconnect()
 }
 
 type Plan = {
@@ -191,6 +196,7 @@ export const getUserCurrentPlan = async (userId: string) => {
   })
 
   if (!user || !user.stripePriceId) {
+    await prisma.$disconnect()
     throw new Error('Esse usuário não encontrou stripePriceId')
   }
 
@@ -205,6 +211,8 @@ export const getUserCurrentPlan = async (userId: string) => {
   const availableTasks = plan.quota.TASKS
   const currentTasks = tasksCount
   const usage = (currentTasks / availableTasks) * 100
+
+  await prisma.$disconnect()
 
   return {
     name: plan.name,

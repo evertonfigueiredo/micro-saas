@@ -1,5 +1,5 @@
-import { ProfileForm } from './_components/form'
+import { SendForm } from './_components/form'
 
 export default async function Page() {
-  return <ProfileForm />
+  return <SendForm />
 }
