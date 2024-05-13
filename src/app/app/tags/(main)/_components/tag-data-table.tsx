@@ -133,11 +133,15 @@ export function TagDataTable({ data, onTagAction }: TagDataTable) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
               <DropdownMenuItem
+                className="cursor-pointer"
                 onClick={() => router.push(`/app/tags/rename?id=${tag.id}`)}
               >
                 Renomear
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleDeleteTag(tag)}>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => handleDeleteTag(tag)}
+              >
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>

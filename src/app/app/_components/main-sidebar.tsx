@@ -16,6 +16,7 @@ import {
   HomeIcon,
   MixerHorizontalIcon,
   PaperPlaneIcon,
+  PersonIcon,
 } from '@radix-ui/react-icons'
 import { usePathname } from 'next/navigation'
 import { UserDropdown } from './user-dropdown'
@@ -59,6 +60,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
             >
               <DrawingPinFilledIcon className="w-3 h-3 mr-3" />
               Minhas Tags
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
+              href="/app/leads"
+              active={isActive('/app/leads')}
+            >
+              <PersonIcon className="w-3 h-3 mr-3" />
+              Meus Leads
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink
               href="/app/settings"

@@ -144,12 +144,16 @@ export function EbookDataTable({ data }: EbookDataTable) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
               <DropdownMenuItem
+                className="cursor-pointer"
                 onClick={() => navigator.clipboard.writeText(todo.id)}
               >
                 Copiar link
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleDeleteEbook(todo)}>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => handleDeleteEbook(todo)}
+              >
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
