@@ -12,6 +12,7 @@ import {
   DashboardSidebarFooter,
 } from '@/components/dashboard/siderbar'
 import {
+  DrawingPinFilledIcon,
   HomeIcon,
   MixerHorizontalIcon,
   PaperPlaneIcon,
@@ -44,19 +45,27 @@ export function MainSidebar({ user }: MainSidebarProps) {
               <HomeIcon className="w-3 h-3 mr-3" />
               Tarefas
             </DashboardSidebarNavLink>
-            <DashboardSidebarNavLink
-              href="/app/settings"
-              active={isActive('/app/settings')}
-            >
-              <MixerHorizontalIcon className="w-3 h-3 mr-3" />
-              Configurações
-            </DashboardSidebarNavLink>
+
             <DashboardSidebarNavLink
               href="/app/up_book"
               active={isActive('/app/up_book')}
             >
               <PaperPlaneIcon className="w-3 h-3 mr-3" />
               Enviar Ebook
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
+              href="/app/tags"
+              active={isActive('/app/tags')}
+            >
+              <DrawingPinFilledIcon className="w-3 h-3 mr-3" />
+              Minhas Tags
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
+              href="/app/settings"
+              active={isActive('/app/settings')}
+            >
+              <MixerHorizontalIcon className="w-3 h-3 mr-3" />
+              Configurações
             </DashboardSidebarNavLink>
           </DashboardSidebarNavMain>
         </DashboardSidebarNav>
