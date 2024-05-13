@@ -269,7 +269,7 @@ export function EbookDataTable({ data }: EbookDataTable) {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Proximo
+            Próximo
           </Button>
         </div>
       </div>

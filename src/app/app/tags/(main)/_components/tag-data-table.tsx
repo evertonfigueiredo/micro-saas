@@ -252,7 +252,7 @@ export function TagDataTable({ data, onTagAction }: TagDataTable) {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Proximo
+            Próximo
           </Button>
         </div>
       </div>

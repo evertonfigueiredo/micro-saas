@@ -50,6 +50,7 @@ export function TagForm() {
     }
 
     featchTag()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const form = useForm<z.infer<typeof createTagSchema>>({
