@@ -51,6 +51,7 @@ export function SendForm() {
   const router = useRouter()
 
   const [ebooks, setEbooks] = useState<Ebook[]>([])
+  const [formKey, setFormKey] = useState(0)
 
   useEffect(() => {
     async function fetchEbooks() {
@@ -67,7 +68,8 @@ export function SendForm() {
 
   const onSubmit = form.handleSubmit(async (data) => {
     const result = await sendBook(data)
-    router.refresh()
+    setFormKey(formKey + 1)
+    form.reset({ email: '', name: '' })
 
     if (result.success) {
       toast({
@@ -85,7 +87,7 @@ export function SendForm() {
   return (
     <ScrollArea>
       <div className="h-[84vh]">
-        <Form {...form}>
+        <Form {...form} key={formKey}>
           <form onSubmit={onSubmit} className="space-y-8 px-4">
             <Card>
               <CardHeader>
@@ -102,7 +104,11 @@ export function SendForm() {
                     <FormItem>
                       <FormLabel>Nome da Pessoa</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o nome" {...field} />
+                        <Input
+                          autoComplete="off"
+                          placeholder="Digite o nome"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -162,7 +168,12 @@ export function SendForm() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="Digite o email" {...field} />
+                        <Input
+                          type="email"
+                          autoComplete="off"
+                          placeholder="Digite o email"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
