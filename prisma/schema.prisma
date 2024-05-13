@@ -56,6 +56,7 @@ model User {
   sessions      Session[]
   todos         Todo[]
   ebooks        Ebook[]
+  tags          Tag[]
 }
  
 model VerificationToken {
@@ -80,6 +81,18 @@ model Todo {
 }
 
 model Ebook {
+  id String @id @default(cuid())
+  title String
+  
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Tag {
   id String @id @default(cuid())
   title String
   
