@@ -57,6 +57,7 @@ model User {
   todos         Todo[]
   ebooks        Ebook[]
   tags          Tag[]
+  leads         Lead[]
 }
  
 model VerificationToken {
@@ -97,6 +98,25 @@ model Tag {
   title String
   
   userId String
+  user User @relation(fields: [userId], references: [id])
+  
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leads     Lead[]
+}
+
+model Lead {
+  id        String @id @default(cuid())
+  name      String?
+  email     String
+  whastapp  String?
+
+  tagId     String?
+  tag Tag?  @relation(fields: [tagId], references: [id])
+  
+  userId    String
   user User @relation(fields: [userId], references: [id])
   
 
