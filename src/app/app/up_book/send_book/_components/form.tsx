@@ -1,7 +1,6 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { getUrlBooks, sendBook } from '../actions'
 import { sendBookSchema } from '../schema'
@@ -48,8 +47,6 @@ type Ebook = {
 }
 
 export function SendForm() {
-  const router = useRouter()
-
   const [ebooks, setEbooks] = useState<Ebook[]>([])
   const [formKey, setFormKey] = useState(0)
 

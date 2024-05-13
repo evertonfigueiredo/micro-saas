@@ -41,7 +41,7 @@ export async function sendBook(data: any) {
 
   if (!session?.user?.id) {
     return {
-      error: 'Não autoriazado',
+      error: 'Não autorizado',
       data: null,
     }
   }

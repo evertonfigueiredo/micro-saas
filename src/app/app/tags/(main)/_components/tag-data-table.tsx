@@ -26,7 +26,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 // import { Input } from '@/components/ui/input'
@@ -47,9 +46,10 @@ import { Badge } from '@/components/ui/badge'
 
 type TagDataTable = {
   data: Tag[]
+  onTagAction: () => void
 }
 
-export function TagDataTable({ data }: TagDataTable) {
+export function TagDataTable({ data, onTagAction }: TagDataTable) {
   const router = useRouter()
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -62,8 +62,7 @@ export function TagDataTable({ data }: TagDataTable) {
 
   const handleDeleteTag = async (Tag: Tag) => {
     const result = await deleteTag({ id: Tag.id })
-    router.refresh()
-
+    onTagAction()
     if (result?.success) {
       toast({
         title: 'Sucesso ao deletar',
@@ -121,7 +120,7 @@ export function TagDataTable({ data }: TagDataTable) {
       },
       enableHiding: false,
       cell: ({ row }) => {
-        const todo = row.original
+        const tag = row.original
 
         return (
           <DropdownMenu>
@@ -134,12 +133,11 @@ export function TagDataTable({ data }: TagDataTable) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Ações</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(todo.id)}
+                onClick={() => router.push(`/app/tags/rename?id=${tag.id}`)}
               >
-                Copiar link
+                Renomear
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleDeleteTag(todo)}>
+              <DropdownMenuItem onClick={() => handleDeleteTag(tag)}>
                 Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -173,14 +171,9 @@ export function TagDataTable({ data }: TagDataTable) {
       <div className="flex items-center pt-0 pb-4">
         <Input
           placeholder="Filtrar por Tag"
-          value={
-            (table.getColumn('formattedTitle')?.getFilterValue() as string) ??
-            ''
-          }
+          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table
-              .getColumn('formattedTitle')
-              ?.setFilterValue(event.target.value)
+            table.getColumn('title')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
