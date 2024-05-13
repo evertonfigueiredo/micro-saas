@@ -90,8 +90,7 @@ export async function deleteEbook(input: z.infer<typeof deleteEbookSchema>) {
   const deleteObjectCommand = new DeleteObjectCommand(params)
 
   try {
-    const response = await r2.send(deleteObjectCommand)
-    console.log('Objeto deletado com sucesso:', response)
+    await r2.send(deleteObjectCommand)
   } catch (error) {
     console.error(error)
 

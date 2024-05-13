@@ -45,7 +45,15 @@ import { toast } from '@/components/ui/use-toast'
 import { Input } from '@/components/ui/input'
 
 type EbookDataTable = {
-  data: Ebook[]
+  data: {
+    id: string
+    title: string
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    link: string
+    formattedTitle: string
+  }[]
 }
 
 export function EbookDataTable({ data }: EbookDataTable) {
@@ -82,16 +90,18 @@ export function EbookDataTable({ data }: EbookDataTable) {
           </Button>
         )
       },
-      cell: ({ row }) => (
-        <div>
-          <a
-            href="https://pub-2e40531df26b477eafc833eaee23309b.r2.dev/clw2am6vo0002zudi8t3ebe3v/1715448026858-José%20Everton%20Figueiredo%20Gomes.pdf"
-            download
-          >
-            {row.getValue('formattedTitle')}
-          </a>
-        </div>
-      ),
+      cell: ({ row }) => {
+        const linkEbook = data.find(
+          (ebook) => ebook.formattedTitle === row.getValue('formattedTitle'),
+        )
+        return (
+          <div>
+            <a href={linkEbook?.link} target="_blank">
+              {row.getValue('formattedTitle')}
+            </a>
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'createdAt',
